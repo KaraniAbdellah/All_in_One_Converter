@@ -1,0 +1,39 @@
+// Introduction to Javax
+/*
+    - import import javafx.application.Application;
+    - Inherit main extends Application
+    - Override start function
+    - Every App launch by launch() function
+    - All Application write in start() function
+    - primaryStage created by JavaFx Auto
+*/
+
+// Control
+/*
+    is Object can be buttons, inputs, textarea
+*/
+
+// Layout
+/*
+    Place that can take Controls, ....
+    -- like container
+    -- frames in python with tkinter
+    -- we are using grid (rows, columns)
+*/
+
+// Scene & Stages
+/*
+    Layout add to Scene and this Scene add to Stage
+*/
+
+STEPS: define controls --> add to layouts --> to scene --> to stage
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
+// Layout:
+/*
+    Container we can put anything (Controls, Scenes)
+    -- we can created by:
+        --> HBox, VBox, GridPane
+*/
