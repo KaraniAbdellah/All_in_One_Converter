@@ -2,6 +2,8 @@
 
 // Packages to Download: 
 javafx: https://gluonhq.com/products/javafx/
-org.json: https://search.maven.org/remotecontent?filepath=org/json/json/20251224/json-20251224.jar
-
+jackson: jackson-core-2.9.6.jar
+jackson-annotations-2.9.6.jar
+jackson-databind-2.9.6.jar
+jackson-dataformat-xml-2.9.6.jar
 

@@ -1,23 +1,17 @@
 package Logic.x2j_j2x;
 
-// We Need to Package
-// org.json: for json to xml
-// 
-
 import org.json.JSONObject;
 import org.json.XML;
 
 public class Xml_To_Json {
-    public String ToXml(String data) {
+    public String ToXml0(String data) {
         // First Way With Ready Packages
-        // String jsonData = "{\"name\":\"John\", \"age\":30, \"car\":null}";
-        // JSONObject jsonObject = new JSONObject(jsonData);
-        // System.out.println(XML.toString(jsonObject));
-        // return jsonData;
-        // Second Way Manually
         String jsonData = "{\"name\":\"John\", \"age\":30, \"car\":null}";
+        JSONObject jsonObject = new JSONObject(jsonData);
+        System.out.println(XML.toString(jsonObject));
+
+        // Second Way Manually
         String xmlData = "";
-        
         return xmlData;
     }
 
