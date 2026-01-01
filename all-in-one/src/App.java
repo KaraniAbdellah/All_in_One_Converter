@@ -1,15 +1,16 @@
 
 import Logic.x2j_j2x.Json_To_Xml;
 import Logic.x2j_j2x.Xml_To_Json;
+import UI.MainStage;
 
 // public class App extends Application {
 public class App {
-    // @Override
+    @Override
     // Controls + Layout + Scene + Stage
-    // public void start(Stage primaryStage) {
-    // MainStage mainStage = new MainStage();
-    // mainStage.createMainStage(primaryStage);
-    // }
+    public void start(Stage primaryStage) {
+        MainStage mainStage = new MainStage();
+        mainStage.createMainStage(primaryStage);
+    }
 
     public static void main(String[] args) {
         String jsonData = "{\"name\":\"John\", \"age\":30, \"car\":null}";
