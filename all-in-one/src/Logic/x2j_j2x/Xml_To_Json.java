@@ -1,12 +1,7 @@
 package Logic.x2j_j2x;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import org.json.JSONObject;
 import org.json.XML;
-
 import services.Services;
 
 public class Xml_To_Json {
@@ -36,11 +31,6 @@ public class Xml_To_Json {
         return xmlData;
     }
 
-    public String ToJson(String data) {
-        String jsonData = "THIS XML DATA";
-        return jsonData;
-    }
-
     public String ToXmlWithApi(String jsonData) {
         Services services = new Services();
         String xmlData = services.getXmlData(jsonData);
@@ -48,14 +38,5 @@ public class Xml_To_Json {
             System.out.println("Can Not Get The Data");
         }
         return xmlData;
-    }
-
-    public String ToJsonWithApi(String xmlData) {
-        Services services = new Services();
-        String jsonData = services.getJsonData(xmlData);
-        if (jsonData == null) {
-            System.out.println("Can Not Get The Data");
-        }
-        return jsonData;
     }
 }

@@ -1,10 +1,6 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
+import Logic.x2j_j2x.Json_To_Xml;
 import Logic.x2j_j2x.Xml_To_Json;
-import UI.MainStage;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 // public class App extends Application {
 public class App {
@@ -16,15 +12,16 @@ public class App {
     // }
 
     public static void main(String[] args) {
-        Xml_To_Json xml_to_json_obj = new Xml_To_Json();
         String jsonData = "{\"name\":\"John\", \"age\":30, \"car\":null}";
-        String xmlData = "<root>" +
-                "<name>John</name>" +
-                "<age>30</age>" +
-                "<car>null</car>" +
-                "</root>";
+        String xmlData = "<?xml version=\"1.0\" ?><test attrib=\"moretest\">Turn this to JSON</test>";
+
+        Xml_To_Json xml_to_json_obj = new Xml_To_Json();
+        Json_To_Xml json_to_xml_obj = new Json_To_Xml();
+
         // xml_to_json_obj.ToXml(jsonData);
-        xml_to_json_obj.ToXmlWithApi(jsonData);
+        json_to_xml_obj.ToJson(xmlData);
+
+        // xml_to_json_obj.ToXmlWithApi(jsonData);
         // launch(args);
     }
 }
