@@ -1,29 +1,38 @@
 package UI;
 
+import java.rmi.server.ServerNotActiveException;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainStage {
+
     public void createMainStage(Stage primaryStage) {
-        Label label = new Label("Hello World, JavaFX !");
-        Scene scene = new Scene(label, 400, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("All In One");
-        primaryStage.setWidth(200);
-        primaryStage.setHeight(200);
-
-        // Header Scene
         Header header = new Header();
-        Scene headerScene = header.createHeaderScene();
-        // Converter Scene
+        Converter converter = new Converter();
+        Info info = new Info();
+        Footer footer = new Footer();
 
-        // Info Scene
+        // Get layouts for each part
+        GridPane headerLayout = header.createHeader();
+        GridPane converterLayout = converter.createConverterScene();
+        GridPane infoLayout = info.createInfoScene();
+        GridPane footerLayout = footer.createFooter();
 
-        // Footer Scene
-        primaryStage.setScene(headerScene);
+        // Put all Layouts in Vertical Layout
+        VBox mainLayout = new VBox(10);
+        mainLayout.getChildren().addAll(headerLayout, converterLayout, infoLayout, footerLayout);
+
+        // Create ONE scene with main layout
+        Scene mainScene = new Scene(mainLayout, 600, 400); // bigger window
+
+        primaryStage.setScene(mainScene);
+        primaryStage.setTitle("All In One Convertion");
         primaryStage.show();
     }
+
 }
