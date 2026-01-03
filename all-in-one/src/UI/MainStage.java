@@ -17,11 +17,13 @@ public class MainStage {
 
         // Header Scene
         Header header = new Header();
+        Scene headerScene = header.createHeaderScene();
         // Converter Scene
 
         // Info Scene
 
         // Footer Scene
+        primaryStage.setScene(headerScene);
         primaryStage.show();
     }
 }

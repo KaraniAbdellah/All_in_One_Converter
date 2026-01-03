@@ -3,7 +3,6 @@ package UI;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class Header {
     public Scene createHeaderScene() {
