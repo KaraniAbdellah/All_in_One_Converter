@@ -7,27 +7,75 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import Logic.x2j_j2x.Json_To_Xml;
+import Logic.x2j_j2x.Xml_To_Json;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 public class Converter {
 
-    public String getOutput(String option1, String option2, String data,
+    public void getOutput(String option1, String option2,
             TextArea Input, TextArea Output) {
-        if (option1 == option2) {
-            return data;
-        } else if (option1 == "XML" && option2 == "JSON") {
-            // From XML to JSON
-            String newData = null;
-            return newData;
-        } else if (option1 == "JSON" && option2 == "XML") {
-            // From JSON to XML
-            String newData = null;
-            return newData;
-        } else {
-            return null;
-        }
 
+        if (option1.equals(option2)) {
+            Output.setText(Input.getText());
+        } else if (option1.equals("XML") && option2.equals("JSON")) {
+            // From XML to JSON
+            Xml_To_Json xml_to_json = new Xml_To_Json();
+            String jsonData = xml_to_json.ToJson(Input.getText());
+            System.out.println("jsonData returned: " + jsonData);
+            Output.setText(jsonData);
+        } else if (option1.equals("JSON") && option2.equals("XML")) {
+            // From JSON to XML
+            Json_To_Xml json_to_xml = new Json_To_Xml();
+            String xmlData = json_to_xml.ToXml(Input.getText());
+            System.out.println("xmlData returned: " + xmlData);
+            Output.setText(formatXml(xmlData));
+        } else {
+            Output.setText("Not Built YET");
+        }
+    }
+
+    private String formatXml(String xml) {
+        try {
+            xml = xml.replaceFirst("<\\?xml.*?\\?>", "").trim();
+
+            StringBuilder formatted = new StringBuilder();
+            int indent = 0;
+            boolean inTag = false;
+
+            for (int i = 0; i < xml.length(); i++) {
+                char c = xml.charAt(i);
+
+                if (c == '<') {
+                    if (i + 1 < xml.length() && xml.charAt(i + 1) == '/') {
+                        // Closing tag
+                        indent--;
+                        formatted.append("\n").append("  ".repeat(Math.max(0, indent)));
+                    } else if (!inTag) {
+                        // Opening tag
+                        formatted.append("\n").append("  ".repeat(indent));
+                    }
+                    inTag = true;
+                } else if (c == '>') {
+                    inTag = false;
+                    if (i > 0 && xml.charAt(i - 1) != '/') {
+                        if (i + 1 < xml.length() && xml.charAt(i + 1) != '<') {
+                        } else {
+                            indent++;
+                        }
+                    }
+                }
+
+                formatted.append(c);
+            }
+
+            return formatted.toString().trim();
+        } catch (Exception e) {
+            return xml; // Return original if formatting fails
+        }
     }
 
     public GridPane createConverterScene() {
@@ -112,6 +160,16 @@ public class Converter {
 
         VBox boxConvertButton = new VBox(10, convertButton);
         boxConvertButton.setAlignment(Pos.CENTER);
+
+        // Events
+        convertButton.setOnMouseClicked(event -> {
+            System.out.println(Input.getText());
+            System.out.println(Output.getText());
+            System.out.println(formatChoiceInput.getValue());
+            System.out.println(formatChoiceOutput.getValue());
+            System.out.println("Button Clicked");
+            getOutput(formatChoiceInput.getValue(), formatChoiceOutput.getValue(), Input, Output);
+        });
 
         // Add all to GridPane
         gridPaneConvertor.add(title, 0, 0);

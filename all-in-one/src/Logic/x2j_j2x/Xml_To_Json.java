@@ -6,37 +6,22 @@ import services.Services;
 
 public class Xml_To_Json {
 
-    public String ToXml(String jsonData) {
-        // First Way With Ready Packages
-        JSONObject jsonObject = new JSONObject(jsonData);
-        System.out.println(XML.toString(jsonObject));
+    public String ToJson(String xmlData) {
+        // One Way
+        JSONObject xmlJsonObj = XML.toJSONObject(xmlData);
+        String jsonData = xmlJsonObj.toString(4);
+        System.out.println(jsonData);
+        return jsonData;
+        // Second Way
 
-        // Second Way Manually
-        String xmlData = "";
-        String jsonDataSplited[] = jsonData.split("");
-        for (int i = 0; i < jsonDataSplited.length; i++) {
-            System.out.print(jsonDataSplited[i]);
-            if (jsonDataSplited[i] == ":") {
-                System.out.println("The Begenning of Value");
-                for (int j = 0; jsonDataSplited[j] == ","; j++) {
-                    xmlData += jsonDataSplited[j];
-                }
-                continue;
-            }
-            if (jsonDataSplited[i] == "\"") {
-                System.out.println("The Begenning attribute");
-            }
-        }
-        System.out.println(xmlData);
-        return xmlData;
     }
 
-    public String ToXmlWithApi(String jsonData) {
+    public String ToJsonWithApi(String xmlData) {
         Services services = new Services();
-        String xmlData = services.getXmlData(jsonData);
-        if (xmlData == null) {
+        String jsonData = services.getJsonData(xmlData);
+        if (jsonData == null) {
             System.out.println("Can Not Get The Data");
         }
-        return xmlData;
+        return jsonData;
     }
 }
