@@ -2,10 +2,9 @@
 [![JavaFX](https://img.shields.io/badge/JavaFX-007396?style=for-the-badge&logo=java&logoColor=white)](https://openjfx.io/)
 
 
-All in One Can Convert JSON, XML, CSV to XML, CVS, JSON
-this is challenge from me to develop algorithms that can translate data fromat X to Y.
-without using any API. and also the project structure. that can let scale to add more features.
-
+All in One can convert JSON, XML, CSV to XML, CSV, JSON.
+This is a challenge from me to develop algorithms that translate data format from X to Y,
+without using any API, and with a project structure that allows scaling and adding more features.
 
 ## THE UI
 choice your data format and paste and click t convert and you will see the result in as ouput
