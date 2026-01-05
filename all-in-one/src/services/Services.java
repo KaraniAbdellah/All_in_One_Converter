@@ -12,7 +12,8 @@ import java.util.Properties;
 public class Services {
     private String BASE_URL_CONFG = "/home/abdellah/Documents/git_projects/All_in_One_Converter/all-in-one/config.properties";
     private HttpClient client;
-    private String API_KEY;
+    private String NOCODE_BASE_URL_JSON_TO_XML;
+    private String NOCODE_BASE_URL_XML_TO_JSON;
 
     public Services() {
         Properties p = new Properties();
@@ -21,24 +22,28 @@ public class Services {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.API_KEY = p.getProperty("RAPIDO_API_KEY");
+        this.NOCODE_BASE_URL_JSON_TO_XML = p.getProperty("NOCODE_BASE_URL_JSON_TO_XML");
+        this.NOCODE_BASE_URL_XML_TO_JSON = p.getProperty("NOCODE_BASE_URL_XML_TO_JSON");
         this.client = HttpClient.newHttpClient();
+        System.out.println("API_KEY = " + this.NOCODE_BASE_URL_JSON_TO_XML);
+        System.out.println("API_KEY = " + this.NOCODE_BASE_URL_XML_TO_JSON);
     }
 
     public String getXmlData(String jsonData) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://json-to-xml.p.rapidapi.com/apitalk/json-to-xml/api/%7B%7D"))
-                    .header("x-rapidapi-key", this.API_KEY)
-                    .header("x-rapidapi-host", "json-to-xml.p.rapidapi.com")
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .uri(URI.create(this.NOCODE_BASE_URL_JSON_TO_XML))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
                     .build();
-            HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            HttpResponse<String> response = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
             System.out.println(response.body());
             return response.body();
-
         } catch (IOException | InterruptedException e) {
-            System.err.println("Error In Sending Request From GetXmlData");
+            System.err.println("Error sending request: " + e.getMessage());
             return null;
         }
     }
@@ -46,20 +51,22 @@ public class Services {
     public String getJsonData(String xmlData) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(
-                            "https://xml-to-json1.p.rapidapi.com/?url=https%3A%2F%2Fwww.w3schools.com%2Fxml%2Fplant_catalog.xml"))
-                    .header("x-rapidapi-key", this.API_KEY)
-                    .header("x-rapidapi-host", "xml-to-json1.p.rapidapi.com")
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .uri(URI.create(this.NOCODE_BASE_URL_XML_TO_JSON))
+                    .header("Content-Type", "application/xml") // important for XML
+                    .POST(HttpRequest.BodyPublishers.ofString(xmlData))
                     .build();
-            HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            HttpResponse<String> response = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
             System.out.println(response.body());
             return response.body();
         } catch (IOException | InterruptedException e) {
-            System.err.println("Error In Sending Request From GetJsonData");
+            System.err.println("Error sending request: " + e.getMessage());
             return null;
         }
-
     }
 
 }
+
+

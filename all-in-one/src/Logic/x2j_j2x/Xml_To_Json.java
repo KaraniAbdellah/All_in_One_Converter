@@ -7,10 +7,9 @@ import services.Services;
 public class Xml_To_Json {
 
     public String ToJson(String xmlData) {
-        // One Way
+        // One Way With org.json
         JSONObject xmlJsonObj = XML.toJSONObject(xmlData);
         String jsonData = xmlJsonObj.toString(4);
-        System.out.println(jsonData);
         return jsonData;
         // Second Way
 

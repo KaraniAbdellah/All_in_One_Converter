@@ -7,7 +7,7 @@ import services.Services;
 
 public class Json_To_Xml {
     public String ToXml(String jsonData) {
-        // First Way With Ready Packages
+        // One Way With org.json
         JSONObject jsonObject = new JSONObject(jsonData);
         String xmlData = XML.toString(jsonObject);
         return xmlData;
