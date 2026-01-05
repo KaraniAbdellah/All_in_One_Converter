@@ -45,7 +45,7 @@ public class Converter {
         gridPaneConvertor.setVgap(10);
 
         // Title and description
-        Label title = new Label("ALL to ALL Convertor");
+        Label title = new Label("ALL IN ONE Convertor");
         title.setStyle(
                 "-fx-font-size: 24px;" +
                         "-fx-font-weight: bold;" +
@@ -107,7 +107,7 @@ public class Converter {
         Input.textProperty().addListener((obs, oldText, newText) -> {
             System.out.println("User typed: " + newText);
             // Here you can add XML to JSON conversion logic
-            Output.setText("{\n  \"example\": \"Your JSON output here\"\n}");
+            Output.setText(">>> LOADING ...");
         });
 
         // Button Convert

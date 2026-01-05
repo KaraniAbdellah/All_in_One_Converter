@@ -4,7 +4,7 @@ javac --module-path /home/abdellah/javafx-sdk-21.0.2/lib \
       -cp "all-in-one/lib/*" \
       all-in-one/src/App.java \
       all-in-one/src/UI/*.java \
-      all-in-one/src/utlis/*.java \
+      all-in-one/src/utils/*.java \
       all-in-one/src/services/*.java \
       all-in-one/src/Logic/x2j_j2x/*.java
 
