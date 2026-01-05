@@ -7,10 +7,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import utils.FormatXml;
 import Logic.x2j_j2x.Json_To_Xml;
 import Logic.x2j_j2x.Xml_To_Json;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -32,49 +31,10 @@ public class Converter {
             Json_To_Xml json_to_xml = new Json_To_Xml();
             String xmlData = json_to_xml.ToXml(Input.getText());
             System.out.println("xmlData returned: " + xmlData);
-            Output.setText(formatXml(xmlData));
+            FormatXml formatXml = new FormatXml();
+            Output.setText(formatXml.formatXmlMethod(xmlData));
         } else {
             Output.setText("Not Built YET");
-        }
-    }
-
-    private String formatXml(String xml) {
-        try {
-            xml = xml.replaceFirst("<\\?xml.*?\\?>", "").trim();
-
-            StringBuilder formatted = new StringBuilder();
-            int indent = 0;
-            boolean inTag = false;
-
-            for (int i = 0; i < xml.length(); i++) {
-                char c = xml.charAt(i);
-
-                if (c == '<') {
-                    if (i + 1 < xml.length() && xml.charAt(i + 1) == '/') {
-                        // Closing tag
-                        indent--;
-                        formatted.append("\n").append("  ".repeat(Math.max(0, indent)));
-                    } else if (!inTag) {
-                        // Opening tag
-                        formatted.append("\n").append("  ".repeat(indent));
-                    }
-                    inTag = true;
-                } else if (c == '>') {
-                    inTag = false;
-                    if (i > 0 && xml.charAt(i - 1) != '/') {
-                        if (i + 1 < xml.length() && xml.charAt(i + 1) != '<') {
-                        } else {
-                            indent++;
-                        }
-                    }
-                }
-
-                formatted.append(c);
-            }
-
-            return formatted.toString().trim();
-        } catch (Exception e) {
-            return xml; // Return original if formatting fails
         }
     }
 
